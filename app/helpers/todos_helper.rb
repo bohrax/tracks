@@ -100,7 +100,8 @@ module TodosHelper
   end
   
   def remote_toggle_checkbox
-    str = check_box_tag('item_id', toggle_check_todo_path(@todo), @todo.completed?, :class => 'item-checkbox')
+    str = check_box_tag('item_id', toggle_check_todo_path(@todo), @todo.completed?, :class => 'item-checkbox',
+                        :disabled => @todo.pending?)
     set_behavior_for_toggle_checkbox
     str
   end
