@@ -222,7 +222,6 @@ class TodosController < ApplicationController
       @todo.add_predecessor_list(params[:predecessor_list])
       if @original_item_predecessor_list != params[:predecessor_list]
         # Recalculate dependencies for this todo
-        debugger
         if @todo.uncompleted_predecessors.empty?
           if @todo.state == 'pending'
             @todo.activate! # Activate pending if no uncompleted predecessors
