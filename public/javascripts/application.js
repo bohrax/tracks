@@ -91,8 +91,14 @@ var TodoBehavior = {
         jQuery(".show_notes").unbind('click').bind('click', function () {
             jQuery(this).next().toggle("fast"); return false;
         });
+    },
+    enableToggleDependencies: function() {
+        jQuery(".show_dependencies").unbind('click').bind('click', function () {
+            jQuery(this).next().toggle("fast"); return false;
+        });
     }
 }
+
 // uncomment the next four lines for easier debugging with FireBug
 // Ajax.Responders.register({
 //  onException: function(source, exception) {
