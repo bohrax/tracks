@@ -92,8 +92,8 @@ var TodoBehavior = {
             jQuery(this).next().toggle("fast"); return false;
         });
     },
-    enableToggleDependencies: function() {
-        jQuery(".show_dependencies").unbind('click').bind('click', function () {
+    enableToggleSuccessors: function() {
+        jQuery(".show_successors").unbind('click').bind('click', function () {
             jQuery(this).next().toggle("fast"); return false;
         });
     }
