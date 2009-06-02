@@ -116,7 +116,7 @@
         jQuery("#toggle-notes-nav").click(function () { jQuery(".todo_notes").toggle(); });
         /* show the notes of a todo */
         TodoBehavior.enableToggleNotes();
-        TodoBehavior.enableToggleDependencies();
+        TodoBehavior.enableToggleSuccessors();
         Nifty("div#todo_new_action_container","normal");
         if ($('flash').visible()) { new Effect.Fade("flash",{duration:5.0}); }
       });
