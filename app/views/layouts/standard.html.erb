@@ -6,7 +6,7 @@
       <meta http-equiv="Refresh" content="<%= @prefs["refresh"].to_i*60 %>;url=<%= request.request_uri %>">
     <% end -%>
     <%= javascript_include_tag "jquery-1.2.6.min" %>
-    <% bundle do %>
+    <% # bundle do %>
       <%= javascript_include_tag *%w[
       hoverIntent superfish prototype
       effects dragdrop controls application
@@ -15,7 +15,7 @@
       protoload flashobject lowpro
       ] %>
       <%= stylesheet_link_tag *%w[ standard superfish calendar-system niftyCorners] %>
-    <% end %>
+    <% # end %>
     <%= javascript_include_tag :unobtrusive %>
     <%= stylesheet_link_tag "print", :media => "print" %>
     <link rel="shortcut icon" href="<%= url_for(:controller => 'favicon.ico') %>" />
