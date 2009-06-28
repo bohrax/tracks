@@ -589,7 +589,7 @@ class TodosController < ApplicationController
 
   def auto_complete_for_tag
     @items = Tag.find(:all,
-    :conditions => [ "name LIKE ?", '%' + params['tag_list'] + '%' ],
+    :conditions => [ "lower(name) LIKE ?", '%' + params['tag_list'].downcase + '%' ],
     :order => "name ASC",
     :limit => 10)
     render :inline => "<%= auto_complete_result(@items, :name) %>"
@@ -600,17 +600,17 @@ class TodosController < ApplicationController
       get_todo_from_params
       # Begin matching todos in current project
       @items = current_user.todos.find(:all, 
-        :conditions => [ 'NOT (id = ?) AND description LIKE ? AND project_id = ?', 
+        :conditions => [ 'NOT (id = ?) AND lower(description) LIKE ? AND project_id = ?', 
                           @todo.id, 
-                          '%' + params[:predecessor_list] + '%',
+                          '%' + params[:predecessor_list].downcase + '%',
                           @todo.project_id ],
         :order => 'description ASC',
         :limit => 10
       )
       if @items.empty? # Match todos in other projects
         @items = current_user.todos.find(:all, 
-          :conditions => [ 'NOT (id = ?) AND description LIKE ?', 
-                            params[:id], '%' + params[:predecessor_list] + '%' ],
+          :conditions => [ 'NOT (id = ?) AND lower(description) LIKE ?', 
+                            params[:id], '%' + params[:predecessor_list].downcase + '%' ],
           :order => 'description ASC',
           :limit => 10
         )
@@ -618,7 +618,7 @@ class TodosController < ApplicationController
     else
       # New todo - TODO: Filter on project
       @items = current_user.todos.find(:all, 
-        :conditions => [ 'description LIKE ?', '%' + params[:predecessor_list] + '%' ],
+        :conditions => [ 'lower(description) LIKE ?', '%' + params[:predecessor_list].downcase + '%' ],
         :order => 'description ASC',
         :limit => 10
       )
