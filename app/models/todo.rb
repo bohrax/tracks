@@ -100,7 +100,6 @@ class Todo < ActiveRecord::Base
       
       # This is probably a bit naive code...
       remove_array.each do |description|
-        debugger
         t = Todo.find_by_description(description)
         self.predecessors.delete(t)
       end
