@@ -70,3 +70,4 @@ else
 end
 # make sure the behavior of the new/updated todo is enabled
 page << "TodoBehavior.enableToggleNotes()"
+page << "TodoBehavior.enableToggleSuccessors()"
