@@ -428,7 +428,7 @@ class TodosController < ApplicationController
     @contexts_to_show = @contexts = current_user.contexts.find(:all, :include => [ :todos ])
     
     current_user.deferred_todos.find_and_activate_ready
-    @not_done_todos = current_user.deferred_todos
+    @not_done_todos = current_user.deferred_todos + current_user.pending_todos
     @count = @not_done_todos.size
     @down_count = @count
     @default_project_context_name_map = build_default_project_context_name_map(@projects).to_json
