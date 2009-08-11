@@ -42,7 +42,7 @@ module TodosHelper
       :url => {:controller => 'todos', :action => 'edit', :id => todo.id},
       :method => 'get',
       :with => "'#{parameters}'",
-      :before => todo_start_waiting_js(todo),
+      :before => todo_hide_menu_and_start_waiting_js(dom_id(todo)),
       :complete => todo_stop_waiting_js)
   end
 
@@ -52,7 +52,7 @@ module TodosHelper
       :url => {:controller => 'todos', :action => 'destroy', :id => todo.id},
       :method => 'delete',
       :with => "'#{parameters}'",
-      :before => todo_start_waiting_js(todo),
+      :before => todo_hide_menu_and_start_waiting_js(dom_id(todo)),
       :complete => todo_stop_waiting_js)
   end
 
@@ -71,13 +71,17 @@ module TodosHelper
       return link_to_remote(
         image_tag("defer_#{days}_off.png", :mouseover => "defer_#{days}.png", :alt => "", :align => "absmiddle")+" Defer #{pluralize(days, "day")}",
         :url => url,
-        :before => todo_start_waiting_js(todo),
+        :before => todo_hide_menu_and_start_waiting_js(dom_id(todo)),
         :complete => todo_stop_waiting_js)
     end
   end
+  
+  def todo_hide_menu_and_start_waiting_js(the_dom_id)
+    return "$('ul#{the_dom_id}').hide();"+todo_start_waiting_js(the_dom_id)
+  end
 
-  def todo_start_waiting_js(todo)
-    return "$('ul#{dom_id(todo)}').hide(); itemContainer = $('#{dom_id(todo)}'); itemContainer.startWaiting()"
+  def todo_start_waiting_js(the_dom_id)
+    return  "itemContainer = $('#{the_dom_id}'); itemContainer.startWaiting()"
   end
 
   def todo_stop_waiting_js
